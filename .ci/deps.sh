@@ -2,7 +2,6 @@
 
 set -eu
 
-SKIP_OPENSSL3="${SKIP_OPENSSL3:-}"
 SKIP_MESON="${SKIP_MESON:-}"
 
 deps_linux_alpine() {
@@ -57,7 +56,7 @@ deps_linux_debian() {
 
   apt update
   apt upgrade -y
-  apt install -y git pkgconf sudo texinfo meson
+  apt install -y git pkgconf sudo texinfo
 
   HOST=${HOST:-}
   if [ "$HOST" = mingw ]; then
@@ -67,7 +66,7 @@ deps_linux_debian() {
   fi
 
   if [ -n "$SKIP_MESON" ]; then
-    return
+    apt install -y meson
   fi
 
   . /etc/os-release

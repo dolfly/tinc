@@ -71,13 +71,6 @@ nolegacy)
 gcrypt)
   run_tests gcrypt -Dcrypto=gcrypt "$@"
   ;;
-openssl3)
-  if [ -d /opt/ssl3 ]; then
-    run_tests openssl3 -Dpkg_config_path=/opt/ssl3/lib64/pkgconfig "$@"
-  else
-    echo >&2 "OpenSSL 3 not installed, skipping test"
-  fi
-  ;;
 *)
   bail "unknown test flavor $1"
   ;;
