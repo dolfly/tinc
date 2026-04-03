@@ -77,18 +77,18 @@ static void test_makedir(unsigned int dir, bool exists) {
 	char path[PATH_MAX];
 	char container[PATH_MAX] = {0};
 
-	if (dir == DIR_CONFDIR) {
+	if(dir == DIR_CONFDIR) {
 		strcpy(path, tmp);
-	} else if (dir == DIR_CONFBASE) {
+	} else if(dir == DIR_CONFBASE) {
 		sprintf(path, "%s/conf", tmp);
 		strcpy(container, tmp);
-	} else if (dir == DIR_CACHE) {
+	} else if(dir == DIR_CACHE) {
 		sprintf(path, "%s/conf/cache", tmp);
 		sprintf(container, "%s/conf", tmp);
-	} else if (dir == DIR_HOSTS) {
+	} else if(dir == DIR_HOSTS) {
 		sprintf(path, "%s/conf/hosts", tmp);
 		sprintf(container, "%s/conf", tmp);
-	} else if (dir == DIR_INVITATIONS) {
+	} else if(dir == DIR_INVITATIONS) {
 		sprintf(path, "%s/conf/invitations", tmp);
 		sprintf(container, "%s/conf", tmp);
 	} else {
