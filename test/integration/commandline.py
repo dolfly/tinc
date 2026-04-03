@@ -15,6 +15,8 @@ import subprocess as subp
 import tempfile
 import time
 
+COOKIE = util.random_string(10)
+
 
 def init(ctx: Test) -> Tinc:
     """Initialize new test nodes."""
@@ -50,13 +52,12 @@ with Test("commandline flags") as context:
     )
 
     for code, flags in tincd_flags:
-        cookie = util.random_string(10)
-        server = node.tincd(*flags, env={"COOKIE": cookie})
+        server = node.tincd(*flags, env={"COOKIE": COOKIE})
 
         if not code:
             log.info("waiting for tincd to come up")
             env = node[Script.TINC_UP].wait().env
-            check.equals(cookie, env["COOKIE"])
+            check.equals(COOKIE, env["COOKIE"])
 
         log.info("stopping tinc")
         node.cmd("stop", code=code)
