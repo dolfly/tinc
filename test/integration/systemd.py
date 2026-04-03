@@ -2,17 +2,17 @@
 
 """Test systemd integration."""
 
-import os
-import socket
-import tempfile
-import time
-
 from testlib import check, path
 from testlib.log import log
 from testlib.feature import Feature
 from testlib.const import MAXSOCKETS
 from testlib.proc import Tinc, Script
 from testlib.test import Test
+
+import os
+import socket
+import tempfile
+import time
 
 
 def tincd_start_socket(foo: Tinc, pass_pid: bool) -> int:

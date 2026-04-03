@@ -2,18 +2,18 @@
 
 """Test supported and unsupported commandline flags."""
 
+from testlib.log import log
+from testlib.proc import Tinc, Script
+from testlib.test import Test
+from testlib.feature import SANDBOX_LEVEL
+from testlib import check, util, path
+
 import os
 import shutil
 import signal
 import subprocess as subp
 import tempfile
 import time
-
-from testlib import check, util, path
-from testlib.log import log
-from testlib.proc import Tinc, Script
-from testlib.test import Test
-from testlib.feature import SANDBOX_LEVEL
 
 
 def init(ctx: Test) -> Tinc:

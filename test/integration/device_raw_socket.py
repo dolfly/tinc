@@ -2,23 +2,22 @@
 
 """Test raw socket device support."""
 
-import sys
-import subprocess as subp
-import socket
-
-from testlib import check, util
 from testlib.log import log
 from testlib.const import EXIT_SKIP
 from testlib.proc import Script
 from testlib.test import Test
 from testlib.external import veth_add, move_dev, ping
+from testlib import check, util
+
+import sys
+import subprocess as subp
+import socket
 
 util.require_root()
 util.require_command("ip", "link")
 
 try:
     s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.IPPROTO_IP)
-    print("Success!")
 except PermissionError:
     log.info("This test requires raw socket privileges")
     sys.exit(77)

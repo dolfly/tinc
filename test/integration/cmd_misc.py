@@ -2,13 +2,13 @@
 
 """Test miscellaneous commands."""
 
-import os
-import typing as T
-
 from testlib import check, cmd
 from testlib.log import log
 from testlib.proc import Tinc, Script
 from testlib.test import Test
+
+import os
+import typing as T
 
 SUBNETS_BAR = ("10.20.30.40", "fe80::")
 

@@ -2,12 +2,12 @@
 
 """Test sign/verify commands."""
 
-import os
-import tempfile
-
-from testlib import util, cmd, check
 from testlib.proc import Tinc
 from testlib.test import Test
+from testlib import util, cmd, check
+
+import os
+import tempfile
 
 PRIV_KEY = """
 -----BEGIN ED25519 PRIVATE KEY-----
@@ -26,7 +26,9 @@ SIGNED_BYTES = """Signature = foo 1653397516 \
 T8Bjg7dc7IjsCrZQC/20qLRsWPlrbthnjyDHQM0BMLoTeAHbLt0fxP5CbTy7Cifgg7P0K179GeahBFsnaIr4MA\n\
 fake testing data\n\
 hello there\n\
-""".encode("utf-8")
+""".encode(
+    "utf-8"
+)
 
 raw_fd, raw_path = tempfile.mkstemp()
 

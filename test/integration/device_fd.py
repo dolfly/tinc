@@ -2,16 +2,16 @@
 
 """Test FD device support."""
 
+from testlib import check
+from testlib.log import log
+from testlib.test import Test
+from testlib.proc import Script
+
 import array
 import socket
 import tempfile
 import threading
 import time
-
-from testlib import check
-from testlib.log import log
-from testlib.test import Test
-from testlib.proc import Script
 
 JUNK_FRAME = b"\xff" * 80
 
