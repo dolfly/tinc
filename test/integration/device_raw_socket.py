@@ -4,6 +4,7 @@
 
 import sys
 import subprocess as subp
+import socket
 
 from testlib import check, util
 from testlib.log import log
@@ -14,6 +15,13 @@ from testlib.external import veth_add, move_dev, ping
 
 util.require_root()
 util.require_command("ip", "link")
+
+try:
+    s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.IPPROTO_IP)
+    print("Success!")
+except PermissionError:
+    log.info("This test requires raw socket privileges")
+    sys.exit(77)
 
 FAKE_DEV = "cqhqdr7knaLzYeMSdy"
 
