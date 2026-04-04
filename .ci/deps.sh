@@ -44,6 +44,7 @@ deps_linux_debian_linux() {
     libminiupnpc-dev:"$HOST" \
     libvdeplug-dev:"$HOST" \
     libcmocka-dev:"$HOST" \
+    pkgconf:"$HOST" \
     systemd-dev \
     "$@"
 
