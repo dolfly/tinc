@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     container:
-      image: debian:stable-slim
+      image: alpine:latest
       env:
         CI: 1
 
@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install dependencies
-        run: SKIP_MESON=1 .ci/deps.sh libpkgconf-dev
+        run: SKIP_MESON=1 .ci/deps.sh muon
 
       - name: Compatibility with muon
         run: .ci/muon/run.sh

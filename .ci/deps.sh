@@ -9,7 +9,8 @@ deps_linux_alpine() {
 
   apk add \
     git pkgconf gcc linux-headers shadow sudo libgcrypt-dev gzip \
-    openssl-dev zlib-dev lzo-dev ncurses-dev readline-dev musl-dev lz4-dev vde2-dev cmocka-dev
+    openssl-dev zlib-dev lzo-dev ncurses-dev readline-dev musl-dev lz4-dev vde2-dev cmocka-dev \
+    "$@"
 
   if [ -z "$SKIP_MESON" ]; then
     apk add meson
