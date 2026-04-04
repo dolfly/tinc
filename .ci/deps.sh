@@ -45,11 +45,13 @@ deps_linux_debian_linux() {
     libvdeplug-dev:"$HOST" \
     libcmocka-dev:"$HOST" \
     pkgconf:"$HOST" \
-    systemd-dev \
     "$@"
 
+  apt install --no-install-recommends systemd-dev || \
+    apt install --no-install-recommends libsystemd-dev
+
   if [ -n "$HOST" ]; then
-    apt install --no-install-recommends -y crossbuild-essential-"$HOST" qemu-user
+    apt install --no-install-recommends -y crossbuild-essential-"$HOST" qemu-user qemu-user-binfmt
   fi
 }
 
