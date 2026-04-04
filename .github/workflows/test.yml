@@ -40,14 +40,14 @@ jobs:
         run: .ci/test/prepare.sh
 
       - name: Run tests with default settings
-        run: sudo -Eu build .ci/test/run.sh default
+        run: .ci/test/run.sh default
 
       - name: Run tests without legacy protocol
-        run: sudo -Eu build .ci/test/run.sh nolegacy
+        run: .ci/test/run.sh nolegacy
         if: always()
 
       - name: Run tests with libgcrypt
-        run: sudo -Eu build .ci/test/run.sh gcrypt
+        run: .ci/test/run.sh gcrypt
         if: always()
 
       - name: Upload test results
@@ -88,17 +88,17 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install dependencies
-        run: sudo .ci/deps.sh autoconf automake iperf3
+        run: .ci/deps.sh autoconf automake iperf3
 
       - name: Compatibility with older versions of tinc
-        run: sudo .ci/compat/run.sh
+        run: .ci/compat/run.sh
         if: always()
 
       - name: Install tools
         run: |
-          sudo apt install -y astyle clang-tidy-$CLANG shellcheck shfmt black pylint mypy
-          sudo update-alternatives --install /usr/bin/clang-tidy     clang-tidy     /usr/bin/clang-tidy-$CLANG     100
-          sudo update-alternatives --install /usr/bin/run-clang-tidy run-clang-tidy /usr/bin/run-clang-tidy-$CLANG 100
+          apt install --no-install-recommends -y astyle clang-tidy-$CLANG shellcheck shfmt black pylint mypy
+          update-alternatives --install /usr/bin/clang-tidy     clang-tidy     /usr/bin/clang-tidy-$CLANG     100
+          update-alternatives --install /usr/bin/run-clang-tidy run-clang-tidy /usr/bin/run-clang-tidy-$CLANG 100
           python3 -m venv /tmp/venv
           . /tmp/venv/bin/activate
           pip3 install markflow
@@ -133,7 +133,7 @@ jobs:
         if: always()
 
       - name: Archive test results
-        run: sudo tar -caf tests.tar.gz /usr/local/etc
+        run: tar -caf tests.tar.gz /usr/local/etc
         continue-on-error: true
         if: always()
 
@@ -166,8 +166,8 @@ jobs:
 
       - name: Install deps
         run: |
-          sudo .ci/deps.sh iputils-arping
-          sudo pip3 install --upgrade cryptography
+          .ci/deps.sh iputils-arping
+          pip3 install --upgrade cryptography
 
       - name: Sanitize tests with default settings
         run: .ci/sanitizers/run.sh default
@@ -224,15 +224,15 @@ jobs:
         run: .ci/test/prepare.sh
 
       - name: Run tests with default settings
-        run: sudo -u build .ci/test/run.sh default
+        run: .ci/test/run.sh default
         if: always()
 
       - name: Run tests without legacy protocol
-        run: sudo -u build .ci/test/run.sh nolegacy
+        run: .ci/test/run.sh nolegacy
         if: always()
 
       - name: Run tests with libgcrypt
-        run: sudo -u build .ci/test/run.sh gcrypt
+        run: .ci/test/run.sh gcrypt
         if: always()
 
       - name: Upload test results

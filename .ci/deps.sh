@@ -8,7 +8,7 @@ deps_linux_alpine() {
   apk upgrade
 
   apk add \
-    git pkgconf gcc linux-headers shadow sudo libgcrypt-dev gzip \
+    git pkgconf gcc linux-headers shadow libgcrypt-dev gzip \
     openssl-dev zlib-dev lzo-dev ncurses-dev readline-dev musl-dev lz4-dev vde2-dev cmocka-dev \
     "$@"
 
@@ -57,7 +57,7 @@ deps_linux_debian() {
 
   apt update
   apt upgrade -y
-  apt install --no-install-recommends -y git pkgconf sudo texinfo
+  apt install --no-install-recommends -y git pkgconf texinfo
 
   HOST=${HOST:-}
   if [ "$HOST" = mingw ]; then
@@ -87,7 +87,7 @@ deps_linux_rhel() {
   fi
 
   yum install -y \
-    git pkgconf gcc sudo \
+    git pkgconf gcc \
     lzo-devel zlib-devel lz4-devel ncurses-devel readline-devel libgcrypt-devel systemd-devel \
     libcmocka-devel cmake \
     openssl-devel "$@"

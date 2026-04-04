@@ -20,12 +20,12 @@ run_tests() {
   header "Cleaning up leftovers from previous runs"
 
   for name in tinc tincd; do
-    sudo pkill -TERM -x "$name" || true
-    sudo pkill -KILL -x "$name" || true
+    pkill -TERM -x "$name" || true
+    pkill -KILL -x "$name" || true
   done
 
   if [ "$(id -u)" != 0 ]; then
-    sudo chown -R "${USER:-$(whoami)}" . || true
+    chown -R "${USER:-$(whoami)}" . || true
   fi
 
   mkdir -p sanitizer logs
@@ -49,14 +49,10 @@ run_tests() {
   code=0
   meson test -C "$flavor" --timeout-multiplier $timeout --verbose || code=$?
 
-  sudo tar -c -z -f "logs/tests.$flavor.tar.gz" "$flavor" sanitizer/ || true
+  tar -c -z -f "logs/tests.$flavor.tar.gz" "$flavor" sanitizer/ || true
 
   return $code
 }
-
-case "$(uname -s)" in
-MINGW* | Darwin) sudo() { "$@"; } ;;
-esac
 
 flavor=$1
 shift
