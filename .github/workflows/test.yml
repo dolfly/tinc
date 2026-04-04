@@ -166,7 +166,7 @@ jobs:
 
       - name: Install deps
         run: |
-          .ci/deps.sh iputils-arping clang
+          .ci/deps.sh iputils-arping clang python3-pip
           pip3 install --upgrade cryptography
 
       - name: Sanitize tests with default settings
@@ -200,9 +200,9 @@ jobs:
           - almalinux:latest
           - fedora:latest
           - fedora:rawhide
-          - debian:oldstable
-          - debian:stable
-          - debian:testing
+          - debian:oldstable-slim
+          - debian:stable-slim
+          - debian:testing-slim
           - ubuntu:latest
           - ubuntu:rolling
     container:

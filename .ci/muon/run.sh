@@ -3,7 +3,6 @@
 set -eux
 
 dir="${1:-build_muon}"
-shift
 
 if muon version >/dev/null; then
   MUON=muon
