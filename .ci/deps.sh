@@ -65,7 +65,7 @@ deps_linux_debian() {
     deps_linux_debian_linux "$@"
   fi
 
-  if [ -n "$SKIP_MESON" ]; then
+  if [ -z "$SKIP_MESON" ]; then
     apt install -y meson
   fi
 
