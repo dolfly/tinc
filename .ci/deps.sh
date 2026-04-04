@@ -8,7 +8,7 @@ deps_linux_alpine() {
   apk upgrade
 
   apk add \
-    git binutils ninja pkgconf gcc linux-headers shadow sudo libgcrypt-dev texinfo gzip \
+    git pkgconf gcc linux-headers shadow sudo libgcrypt-dev gzip \
     openssl-dev zlib-dev lzo-dev ncurses-dev readline-dev musl-dev lz4-dev vde2-dev cmocka-dev
 
   if [ -z "$SKIP_MESON" ]; then
@@ -17,7 +17,7 @@ deps_linux_alpine() {
 }
 
 deps_linux_debian_mingw() {
-  apt install -y \
+  apt install --no-install-recommends -y \
     mingw-w64 mingw-w64-tools \
     wine wine-binfmt \
     libgcrypt-mingw-w64-dev \
@@ -27,12 +27,12 @@ deps_linux_debian_mingw() {
 deps_linux_debian_linux() {
   if [ -n "$HOST" ]; then
     dpkg --add-architecture "$HOST"
+    apt update
   fi
 
-  apt update
-
-  apt install -y \
-    binfmt-support binutils gcc make pkgconf \
+  apt install --no-install-recommends -y \
+    build-essential \
+    binfmt-support binutils \
     zlib1g-dev:"$HOST" \
     libssl-dev:"$HOST" \
     liblzo2-dev:"$HOST" \
@@ -43,11 +43,11 @@ deps_linux_debian_linux() {
     libminiupnpc-dev:"$HOST" \
     libvdeplug-dev:"$HOST" \
     libcmocka-dev:"$HOST" \
-    libsystemd-dev:"$HOST" \
+    systemd-dev \
     "$@"
 
   if [ -n "$HOST" ]; then
-    apt install -y crossbuild-essential-"$HOST" qemu-user
+    apt install --no-install-recommends -y crossbuild-essential-"$HOST" qemu-user
   fi
 }
 
@@ -56,7 +56,7 @@ deps_linux_debian() {
 
   apt update
   apt upgrade -y
-  apt install -y git pkgconf sudo texinfo
+  apt install --no-install-recommends -y git pkgconf sudo texinfo
 
   HOST=${HOST:-}
   if [ "$HOST" = mingw ]; then
@@ -86,8 +86,9 @@ deps_linux_rhel() {
   fi
 
   yum install -y \
-    git binutils make ninja-build pkgconf gcc sudo texinfo-tex systemd perl-IPC-Cmd \
+    git pkgconf gcc sudo \
     lzo-devel zlib-devel lz4-devel ncurses-devel readline-devel libgcrypt-devel systemd-devel \
+    libcmocka-devel cmake \
     openssl-devel "$@"
 
   if [ -z "$SKIP_MESON" ]; then
