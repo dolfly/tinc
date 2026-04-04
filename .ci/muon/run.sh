@@ -1,9 +1,4 @@
-#!/bin/bash
-
-# Fetch and build
-#   muon (a C reimplementation of the meson build system),
-#   samurai (a C reimplementation of the ninja build tool),
-# and then use both to build tinc.
+#!/bin/sh
 
 set -eux
 
