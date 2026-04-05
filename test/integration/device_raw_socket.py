@@ -42,7 +42,11 @@ def test_device_raw_socket(ctx: Test) -> None:
 
     log.info("create a veth pair")
     dev0, dev1 = util.random_string(10), util.random_string(10)
-    veth_add(dev0, dev1)
+    try:
+        veth_add(dev0, dev1)
+    except subp.CalledProcessError:
+        log.info("This test requires network privileges")
+        sys.exit(77)
 
     log.info("configure the veth pair")
     move_dev(dev1, dev1, f"{IP_NETNS}/30")

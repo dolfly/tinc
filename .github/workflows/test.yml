@@ -161,6 +161,9 @@ jobs:
         SANITIZER: "${{ matrix.sanitizer }}"
 
     steps:
+      - name: Install Git
+        run: apt update; apt install -y --no-install-recommends git
+
       - name: Checkout code
         uses: actions/checkout@v6
 
@@ -209,9 +212,6 @@ jobs:
       env:
         CI: 1
     steps:
-      - name: Install Git
-        run: apt update; apt install --no-install-recommends git
-
       - name: Checkout code
         uses: actions/checkout@v6
 
