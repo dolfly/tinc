@@ -210,7 +210,7 @@ jobs:
         CI: 1
     steps:
       - name: Install Git
-        run: apt install --no-install-recommends git
+        run: apt update; apt install --no-install-recommends git
 
       - name: Checkout code
         uses: actions/checkout@v6
