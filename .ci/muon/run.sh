@@ -13,5 +13,15 @@ else
   exit 1
 fi
 
+if samu --version >/dev/null; then
+  SAMU=samu
+elif ninja --version >/dev/null; then
+  SAMU=ninja
+else
+  echo 'Neither samu nor ninja found' >&2
+  exit 1
+fi
+
 $MUON setup "$dir"
-$MUON -C "$dir" test basic.py
+$SAMU -C "$dir"
+"$dir"/src/tinc --version
