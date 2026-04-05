@@ -165,9 +165,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install deps
-        run: |
-          .ci/deps.sh iputils-arping clang python3-pip
-          pip3 install --upgrade cryptography
+        run: .ci/deps.sh iputils-arping clang libclang-rt-dev
 
       - name: Sanitize tests with default settings
         run: .ci/sanitizers/run.sh default
@@ -211,6 +209,9 @@ jobs:
       env:
         CI: 1
     steps:
+      - name: Install Git
+        run: apt install --no-install-recommends git
+
       - name: Checkout code
         uses: actions/checkout@v6
 

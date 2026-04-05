@@ -32,6 +32,8 @@ deps_linux_debian_linux() {
   fi
 
   apt install --no-install-recommends -y \
+    iproute2 \
+    python3-cryptography \
     build-essential \
     binfmt-support binutils \
     zlib1g-dev:"$HOST" \
