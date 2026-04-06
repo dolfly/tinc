@@ -170,6 +170,9 @@ jobs:
       - name: Install deps
         run: .ci/deps.sh iputils-arping clang libclang-rt-dev
 
+      - name: Prepare the system
+        run: .ci/test/prepare.sh
+
       - name: Sanitize tests with default settings
         run: .ci/sanitizers/run.sh default
         if: always()

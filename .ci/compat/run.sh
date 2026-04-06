@@ -139,6 +139,11 @@ tinc11() {
   /opt/tinc11/sbin/tinc -c $etc/tinc11 "$@"
 }
 
+if [ -n "$CI" ]; then
+  # Workaround for ip netns exec messing with /sys mount in containers
+  mount -t sysfs --make-private sysfs $(mktemp -d)
+fi
+
 header 'Creating branches'
 
 for node in $nodes; do
