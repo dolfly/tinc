@@ -448,7 +448,9 @@ static bool read_packet(vpn_packet_t *packet) {
 
 	case DEVICE_TYPE_UTUN:
 	case DEVICE_TYPE_TUNIFHEAD: {
-		if((inlen = read(device_fd, DATA(packet) + 10, MTU - 10)) <= 0) {
+		inlen = read(device_fd, DATA(packet) + 10, MTU - 10);
+
+		if(inlen <= 0) {
 			logger(DEBUG_ALWAYS, LOG_ERR, "Error while reading from %s %s: %s", device_info,
 			       device, strerror(errno));
 			return false;
@@ -482,7 +484,9 @@ static bool read_packet(vpn_packet_t *packet) {
 	case DEVICE_TYPE_VMNET:
 #endif
 	case DEVICE_TYPE_TAP:
-		if((inlen = read(device_fd, DATA(packet), MTU)) <= 0) {
+		inlen = read(device_fd, DATA(packet), MTU);
+
+		if(inlen <= 0) {
 			logger(DEBUG_ALWAYS, LOG_ERR, "Error while reading from %s %s: %s", device_info,
 			       device, strerror(errno));
 			return false;

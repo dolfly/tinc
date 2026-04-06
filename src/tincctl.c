@@ -917,8 +917,9 @@ static int cmd_start(int argc, char *argv[]) {
 	char *slash = strrchr(program_name, '/');
 
 #ifdef HAVE_WINDOWS
+	c = strrchr(program_name, '\\');
 
-	if((c = strrchr(program_name, '\\')) > slash) {
+	if(c > slash) {
 		slash = c;
 	}
 

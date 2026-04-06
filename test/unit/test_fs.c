@@ -122,6 +122,10 @@ static void test_makedir(unsigned int dir, bool exists) {
 		DIR *d = opendir(container);
 		assert_non_null(d);
 
+		if (!d) {
+			abort();
+		}
+
 		struct dirent *ent;
 
 		while((ent = readdir(d))) {
