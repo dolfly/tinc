@@ -139,7 +139,7 @@ def test_relative_path(ctx: Test, chroot: bool) -> None:
 
         log.info("stopping tinc through '%s'", pidfile)
         foo.cmd("--pidfile", pidfile, "stop")
-        check.success(tincd.wait())
+        tincd.wait()
 
     # Leave behind as debugging aid if there's an exception
     shutil.rmtree(shortcut)

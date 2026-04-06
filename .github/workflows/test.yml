@@ -80,10 +80,14 @@ jobs:
     timeout-minutes: 30
     container:
       image: debian:stable-slim
+      options: --privileged
       env:
         CI: 1
 
     steps:
+      - name: Install Git
+        run: apt update; apt install -y --no-install-recommends git
+
       - name: Checkout code
         uses: actions/checkout@v6
 
@@ -96,7 +100,7 @@ jobs:
 
       - name: Install tools
         run: |
-          apt install --no-install-recommends -y astyle clang-tidy-$CLANG shellcheck shfmt black pylint mypy
+          apt install --no-install-recommends -y astyle clang-tidy-$CLANG shellcheck shfmt black pylint mypy python3-venv
           update-alternatives --install /usr/bin/clang-tidy     clang-tidy     /usr/bin/clang-tidy-$CLANG     100
           update-alternatives --install /usr/bin/run-clang-tidy run-clang-tidy /usr/bin/run-clang-tidy-$CLANG 100
           python3 -m venv /tmp/venv
@@ -161,14 +165,11 @@ jobs:
         SANITIZER: "${{ matrix.sanitizer }}"
 
     steps:
-      - name: Install Git
-        run: apt update; apt install -y --no-install-recommends git
-
       - name: Checkout code
         uses: actions/checkout@v6
 
       - name: Install deps
-        run: .ci/deps.sh iputils-arping clang libclang-rt-dev
+        run: .ci/deps.sh clang libclang-rt-dev
 
       - name: Prepare the system
         run: .ci/test/prepare.sh

@@ -8,7 +8,7 @@ deps_linux_alpine() {
   apk upgrade
 
   apk add \
-    git pkgconf gcc linux-headers shadow libgcrypt-dev gzip \
+    git pkgconf gcc linux-headers shadow libgcrypt-dev gzip iproute2 iputils-ping iputils-arping mount \
     openssl-dev zlib-dev lzo-dev ncurses-dev readline-dev musl-dev lz4-dev vde2-dev cmocka-dev \
     "$@"
 
@@ -32,7 +32,7 @@ deps_linux_debian_linux() {
   fi
 
   apt install --no-install-recommends -y \
-    iproute2 \
+    iproute2 iputils-ping iputils-arping \
     python3-cryptography \
     build-essential \
     binfmt-support binutils \
@@ -49,7 +49,7 @@ deps_linux_debian_linux() {
     pkgconf:"$HOST" \
     "$@"
 
-  apt install --no-install-recommends systemd-dev || \
+  apt install --no-install-recommends systemd-dev ||
     apt install --no-install-recommends libsystemd-dev
 
   if [ -n "$HOST" ]; then

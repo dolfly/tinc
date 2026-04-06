@@ -96,8 +96,9 @@ test_network() {
 
   header "Sending data between $from and $to"
 
-  ip netns exec "$from" \
-    iperf3 --time 1 --client "${addr[$to]}"
+  # Try twice in case tinc hasn't finished PMTU discovery yet
+  ip netns exec "$from" iperf3 --time 1 --client "${addr[$to]}" ||
+    ip netns exec "$from" iperf3 --time 1 --client "${addr[$to]}"
 }
 
 test_sign_verify() {

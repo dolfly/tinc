@@ -4,7 +4,7 @@ set -euo pipefail
 
 dir=$(realpath "$(dirname "$0")")
 
-logs="$GITHUB_WORKSPACE/sanitizer"
+logs="sanitizer"
 
 case "$SANITIZER" in
 undefined)
